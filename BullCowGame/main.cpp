@@ -7,7 +7,7 @@ using int32 = int;
 
 void PrintIntro();
 void PlayGame();
-FText GetGuess();
+FText GetValidGuess();
 bool AskToPlayAgain();
 
 constexpr int32 MAX_TRIES = 8;
@@ -47,7 +47,7 @@ void PlayGame() {
 
 	// Repeat the guess back to them
 	for (int i = 0; i < MaxTries; i++){
-		FText Guess = GetGuess(); // TODO: Make a loop checking validy
+		FText Guess = GetValidGuess(); // TODO: Make a loop checking validy
 
 		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 
@@ -59,16 +59,35 @@ void PlayGame() {
 }
 
 
-FText GetGuess()
+FText GetValidGuess()
 {
 	int32 CurrenTry = BCGame.GetCurrentTry();
-	// Get a guess from the player
-	std::cout << "Try " << CurrenTry << " ";
-	FText Guess = "";
-	std::cout << "Enter your guess: ";
-	std::getline(std::cin, Guess);
 
-	return Guess;
+	std::cout << "\nTry " << CurrenTry << ". ";
+	EGuessStatus Status = EGuessStatus::Invalid;
+
+	do
+	{
+		FText Guess = "";
+		std::cout << "Enter your guess: ";
+		std::getline(std::cin, Guess);
+
+		Status = BCGame.CheckGuessValidity(Guess);
+		switch (Status)
+		{
+		case EGuessStatus::Not_Isogram:
+			std::cout << "Not isogram. \nPlease enter a valid isogram(not repeat letters) word.\n";
+			break;
+		case EGuessStatus::Not_Lowercase:
+			std::cout << "Not lowercase. \nPlease enter all lowercase letters word.\n";
+			break;
+		case EGuessStatus::Wrong_Length:
+			std::cout << "Wrong length. \nPlease enter a " << BCGame.GetHiddenWordLength() << " letter word.\n";
+			break;
+		default:
+			return Guess;
+		}
+	} while (Status != EGuessStatus::OK);
 }
 
 bool AskToPlayAgain()
