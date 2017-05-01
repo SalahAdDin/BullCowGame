@@ -29,11 +29,31 @@ FString FBullCowGame::GenerateIsogram()
 	return FString();
 }
 
-
-FBullCowGame::FBullCowGame(int32 MaxTries)
+FBullCowCount FBullCowGame::SubmitGuess(FString)
 {
-	MyCurrentTry = 0;
+	MyCurrentTry++;
+	FBullCowCount BullCowCount;
+
+	for (int32 i = 0; i < MyHiddenWord.length(); i++)
+	{
+		for (int32 j = 0; j < MyHiddenWord.length(); j++)
+		{
+			if (MyHiddenWord[i])
+			{
+
+			}
+		}
+	}
+
+	return BullCowCount;
+}
+
+
+FBullCowGame::FBullCowGame(int32 MaxTries, FString HiddenWord)
+{
+	MyCurrentTry = 1;
 	MyMaxtries = MaxTries;
+	MyHiddenWord = HiddenWord;
 }
 
 

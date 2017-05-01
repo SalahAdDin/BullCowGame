@@ -10,13 +10,17 @@ void PlayGame();
 FText GetGuess();
 bool AskToPlayAgain();
 
+constexpr int32 MAX_TRIES = 8;
+const FString HIDDEN_WORD = "planet";
 
-FBullCowGame BCGame; // Instantiate a new game
+
+
+FBullCowGame BCGame = FBullCowGame::FBullCowGame(MAX_TRIES, HIDDEN_WORD);  // Instantiate a new game
+// Why have to use a double function calling? 
+
 
 int main()
-{
-	constexpr int32 MAX_TRIES = 8;
-	BCGame = FBullCowGame(MAX_TRIES);
+{	
 	do
 	{
 		PrintIntro();
