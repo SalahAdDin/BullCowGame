@@ -14,12 +14,17 @@ int32 FBullCowGame::GetCurrentTry() const
 	return MyCurrentTry;
 }
 
+int32 FBullCowGame::GetHiddenWordLength() const
+{
+	return MyHiddenWord.length();
+}
+
 bool FBullCowGame::IsGameWon() const
 {
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(FString)
+bool FBullCowGame::CheckGuessValidity(FString) const
 {
 	return false;
 }
@@ -29,7 +34,7 @@ FString FBullCowGame::GenerateIsogram()
 	return FString();
 }
 
-FBullCowCount FBullCowGame::SubmitGuess(FString)
+FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 {
 	MyCurrentTry++;
 	FBullCowCount BullCowCount;
@@ -38,9 +43,16 @@ FBullCowCount FBullCowGame::SubmitGuess(FString)
 	{
 		for (int32 j = 0; j < MyHiddenWord.length(); j++)
 		{
-			if (MyHiddenWord[i])
+			if (Guess[j] == MyHiddenWord[i])
 			{
-
+				if (i == j)
+				{
+					BullCowCount.bulls++;
+				}
+				else
+				{
+					BullCowCount.cows++;
+				}
 			}
 		}
 	}

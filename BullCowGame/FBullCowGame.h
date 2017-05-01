@@ -16,13 +16,14 @@ public:
 
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
+	int32 GetHiddenWordLength() const;
 	bool IsGameWon() const;
 
 	void reset(); // TODO: Make a more rich return value.
-	bool CheckGuessValidity(FString); // TODO: Make a more rich return value.
+	bool CheckGuessValidity(FString) const; // TODO: Make a more rich return value.
 	FString GenerateIsogram();
 
-	FBullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitGuess(FString Guess);
 
 	FBullCowGame(int32 MaxTries, FString HiddenWord);
 	~FBullCowGame();
