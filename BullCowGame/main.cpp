@@ -9,6 +9,7 @@ void PrintIntro();
 void PlayGame();
 FText GetValidGuess();
 bool AskToPlayAgain();
+void PrintGameSummaery();
 
 constexpr int32 MAX_TRIES = 8;
 const FString HIDDEN_WORD = "planet";
@@ -56,6 +57,10 @@ void PlayGame() {
 
 		std::cout << "Your guess was: " << Guess << std::endl;
 	}
+
+	PrintGameSummaery();
+	
+	return;
 }
 
 
@@ -101,4 +106,19 @@ bool AskToPlayAgain()
 	std::cout << "\n\n\n\n";
 
 	return (Response[0] == 'y' || Response[0] == 'Y');
+}
+
+void PrintGameSummaery()
+{
+	if (BCGame.IsGameWon())
+	{
+		std::cout << "\nCongratulations! WELLDONE - YOU WIN!!!\n";
+		std::cout << "\n	Hidden word: ";
+		std::cout << "\n	Number of tries: " << BCGame.GetCurrentTry() << "\n\n";
+	}
+	else
+	{
+		std::cout << "Sorry! YOU LOSE!!!\n";
+		std::cout << "	Better luck for the next time\n\n";
+	}
 }
