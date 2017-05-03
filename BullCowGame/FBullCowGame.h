@@ -32,7 +32,7 @@ public:
 	EGuessStatus CheckGuessValidity(FString Guess) const; // TODO: Make a more rich return value.
 	FString GenerateIsogram();
 
-	FBullCowCount SubmitGuess(FString Guess);
+	FBullCowCount SubmitValidGuess(FString Guess);
 
 	FBullCowGame(int32 MaxTries, FString HiddenWord);
 	~FBullCowGame();
@@ -41,4 +41,5 @@ private:
 	int32 MyCurrentTry;
 	int32 MyMaxtries;
 	FString MyHiddenWord;
+	bool bGameIsWon;
 };

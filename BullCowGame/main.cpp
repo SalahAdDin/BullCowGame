@@ -35,7 +35,7 @@ int main()
 void PrintIntro() {
 	// Introduce the game
 	std::cout << "Wellcome to Bulls and Cows, a fun word game.\n";
-	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?\n" << std::endl;
+	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?\n" ;
 
 	return;
 }
@@ -46,10 +46,10 @@ void PlayGame() {
 	int32 MaxTries = BCGame.GetMaxTries();
 
 	// Repeat the guess back to them
-	for (int i = 0; i < MaxTries; i++){
+	while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries){
 		FText Guess = GetValidGuess(); // TODO: Make a loop checking validy
 
-		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 
 		std::cout << "Bulls = " << BullCowCount.bulls << std::endl;
 		std::cout << "Cows = " << BullCowCount.cows << std::endl;
@@ -63,12 +63,13 @@ FText GetValidGuess()
 {
 	int32 CurrenTry = BCGame.GetCurrentTry();
 
-	std::cout << "\nTry " << CurrenTry << ". ";
+	FText Guess = "";
+
+	std::cout << "\n\n\nTry " << CurrenTry << ". ";
 	EGuessStatus Status = EGuessStatus::Invalid;
 
 	do
 	{
-		FText Guess = "";
 		std::cout << "Enter your guess: ";
 		std::getline(std::cin, Guess);
 
@@ -76,18 +77,20 @@ FText GetValidGuess()
 		switch (Status)
 		{
 		case EGuessStatus::Not_Isogram:
-			std::cout << "Not isogram. \nPlease enter a valid isogram(not repeat letters) word.\n";
+			std::cout << "Not isogram. \nPlease enter a valid isogram(not repeat letters) word.\n\n";
 			break;
 		case EGuessStatus::Not_Lowercase:
-			std::cout << "Not lowercase. \nPlease enter all lowercase letters word.\n";
+			std::cout << "Not lowercase. \nPlease enter all lowercase letters word.\n\n";
 			break;
 		case EGuessStatus::Wrong_Length:
-			std::cout << "Wrong length. \nPlease enter a " << BCGame.GetHiddenWordLength() << " letter word.\n";
+			std::cout << "Wrong length. \nPlease enter a " << BCGame.GetHiddenWordLength() << " letter word.\n\n";
 			break;
 		default:
-			return Guess;
+			break;
 		}
+
 	} while (Status != EGuessStatus::OK);
+	return Guess;
 }
 
 bool AskToPlayAgain()
@@ -95,6 +98,7 @@ bool AskToPlayAgain()
 	std::cout << "Do you want to play again? (y / n)";
 	FText Response = "";
 	std::getline(std::cin, Response);
+	std::cout << "\n\n\n\n";
 
 	return (Response[0] == 'y' || Response[0] == 'Y');
 }
