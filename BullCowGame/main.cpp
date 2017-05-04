@@ -117,6 +117,7 @@ void PrintGameSummary()
 		std::cout << "\nCongratulations! WELLDONE - YOU WIN!!!\n";
 		std::cout << "\n	Hidden word: ";
 		std::cout << "\n	Number of tries: " << BCGame.GetCurrentTry() << "\n\n";
+		// TODO: it is giving to me one try more.
 	}
 	else
 	{
