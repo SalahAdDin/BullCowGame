@@ -34,12 +34,11 @@ public:
 
 	FBullCowCount SubmitValidGuess(FString Guess);
 
-	FBullCowGame(int32 MaxTries, FString HiddenWord);
+	FBullCowGame(FString HiddenWord);
 	~FBullCowGame();
 
 private:
 	int32 MyCurrentTry;
-	int32 MyMaxtries;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 

@@ -6,17 +6,17 @@ using FText = std::string;
 using int32 = int;
 
 void PrintIntro();
+int32 ChooseHiddenWordLength();
 void PlayGame();
 FText GetValidGuess();
 bool AskToPlayAgain();
 void PrintGameSummary();
 
-constexpr int32 MAX_TRIES = 8;
-const FString HIDDEN_WORD = "planet";
+const FString HIDDEN_WORD = "plane";
 
 
 
-FBullCowGame BCGame = FBullCowGame::FBullCowGame(MAX_TRIES, HIDDEN_WORD);  // Instantiate a new game
+FBullCowGame BCGame = FBullCowGame::FBullCowGame(HIDDEN_WORD);  // Instantiate a new game
 // Why have to use a double function calling? 
 
 
@@ -41,6 +41,24 @@ void PrintIntro() {
 	// TODO: Verify why the next games all time are win!
 
 	return;
+}
+
+// TODO: Implements in main game
+int32 ChooseHiddenWordLength()
+{
+	int32 HiddenWordLength = 6;
+
+	std::cout << "Do you want choose the hidden word length? (y / n)";
+	FText Response = "";
+	std::getline(std::cin, Response);
+
+	if (Response[0] == 'y' || Response[0] == 'Y')
+	{
+		std::cout << "How many characters do you want for the hidden word?: ";
+		std::cin >> HiddenWordLength;
+	}
+
+	return HiddenWordLength;
 }
 
 

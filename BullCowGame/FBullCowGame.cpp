@@ -8,7 +8,14 @@ void FBullCowGame::reset()
 
 int32 FBullCowGame::GetMaxTries() const
 {
-	return MyMaxtries;
+	constexpr int32 MaxDifficult = 10;
+	TMap<int32, int32> WordLengthToMaxTries;
+	for (auto i = 3; i <= MaxDifficult; i++)
+	{
+		WordLengthToMaxTries[i] = (i*(i - 1)) / 2;
+	}
+
+	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
 
 int32 FBullCowGame::GetCurrentTry() const
@@ -63,10 +70,9 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 }
 
 
-FBullCowGame::FBullCowGame(int32 MaxTries, FString HiddenWord)
+FBullCowGame::FBullCowGame(FString HiddenWord)
 {
 	MyCurrentTry = 1;
-	MyMaxtries = MaxTries;
 	MyHiddenWord = HiddenWord;
 	bGameIsWon = false;
 }
