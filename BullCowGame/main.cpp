@@ -9,7 +9,7 @@ void PrintIntro();
 void PlayGame();
 FText GetValidGuess();
 bool AskToPlayAgain();
-void PrintGameSummaery();
+void PrintGameSummary();
 
 constexpr int32 MAX_TRIES = 8;
 const FString HIDDEN_WORD = "planet";
@@ -38,6 +38,8 @@ void PrintIntro() {
 	std::cout << "Wellcome to Bulls and Cows, a fun word game.\n";
 	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?\n" ;
 
+	// TODO: Verify why the next games all time are win!
+
 	return;
 }
 
@@ -58,7 +60,7 @@ void PlayGame() {
 		std::cout << "Your guess was: " << Guess << std::endl;
 	}
 
-	PrintGameSummaery();
+	PrintGameSummary();
 	
 	return;
 }
@@ -108,7 +110,7 @@ bool AskToPlayAgain()
 	return (Response[0] == 'y' || Response[0] == 'Y');
 }
 
-void PrintGameSummaery()
+void PrintGameSummary()
 {
 	if (BCGame.IsGameWon())
 	{

@@ -28,22 +28,10 @@ bool FBullCowGame::IsGameWon() const
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
-	if (!IsIsogram(Guess)
-	{
-		return EGuessStatus::Not_Isogram;
-	}
-	else if (false)
-	{
-		return EGuessStatus::Not_Lowercase;
-	}
-	else if (Guess.length() != GetHiddenWordLength())
-	{
-		return EGuessStatus::Wrong_Length;
-	}
-	else
-	{
-		return EGuessStatus::OK;
-	}
+	if (!IsIsogram(Guess))	return EGuessStatus::Not_Isogram;
+	else if (false)	return EGuessStatus::Not_Lowercase;
+	else if (Guess.length() != GetHiddenWordLength())	return EGuessStatus::Wrong_Length;
+	else return EGuessStatus::OK;
 }
 
 FString FBullCowGame::GenerateIsogram()
@@ -96,5 +84,17 @@ FBullCowGame::~FBullCowGame()
 
 bool FBullCowGame::IsIsogram(FString Word) const
 {
-	return false;
+	if (Word.length() <= 1)	return true;
+
+	TMap<char, bool> LetterSeen;
+
+	for (auto Letter : Word)
+	{
+		Letter = tolower(Letter);
+
+		if (LetterSeen[Letter]) return false;
+		else LetterSeen[Letter] = true;
+	}
+
+	return true;
 }
