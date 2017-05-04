@@ -52,14 +52,8 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 		{
 			if (Guess[j] == MyHiddenWord[i])
 			{
-				if (i == j)
-				{
-					BullCowCount.bulls++;
-				}
-				else
-				{
-					BullCowCount.cows++;
-				}
+				if (i == j) BullCowCount.bulls++;
+				else BullCowCount.cows++;
 			}
 		}
 	}
@@ -104,7 +98,6 @@ bool FBullCowGame::IsLowerCase(FString Word) const
 	for (auto Letter : Word)
 	{
 		if (!islower(Letter)) return false;
-		else return true;
 	}
 	return true;
 }

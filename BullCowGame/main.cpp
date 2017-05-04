@@ -54,8 +54,7 @@ void PlayGame() {
 
 		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 
-		std::cout << "Bulls = " << BullCowCount.bulls << std::endl;
-		std::cout << "Cows = " << BullCowCount.cows << std::endl;
+		std::cout << "Bulls = " << BullCowCount.bulls << "	|	Cows = " << BullCowCount.cows << std::endl;
 
 		std::cout << "Your guess was: " << Guess << std::endl;
 	}
@@ -72,7 +71,7 @@ FText GetValidGuess()
 
 	FText Guess = "";
 
-	std::cout << "\n\n\nTry " << CurrenTry << ". ";
+	std::cout << "\n\n\nTry " << CurrenTry << " of " << BCGame.GetMaxTries() << ". ";
 	EGuessStatus Status = EGuessStatus::Invalid;
 
 	do
@@ -114,10 +113,11 @@ void PrintGameSummary()
 {
 	if (BCGame.IsGameWon())
 	{
+		int32 Tries = BCGame.GetCurrentTry();
 		std::cout << "\nCongratulations! WELLDONE - YOU WIN!!!\n";
 		std::cout << "\n	Hidden word: ";
-		std::cout << "\n	Number of tries: " << BCGame.GetCurrentTry() << "\n\n";
-		// TODO: it is giving to me one try more.
+		std::cout << "\n	Number of tries: " << (--Tries) << "\n\n";
+		// TODO: it is giving to me one try more. The game should freeze the current try number if the game is won
 	}
 	else
 	{
