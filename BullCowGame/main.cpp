@@ -1,10 +1,13 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include "FBullCowGame.h"
 
+// Make syntax Unreal friendly
 using FText = std::string;
 using int32 = int;
-
+ 
 void PrintIntro();
 int32 ChooseHiddenWordLength();
 void PlayGame();
@@ -66,9 +69,8 @@ void PlayGame() {
 	
 	int32 MaxTries = BCGame.GetMaxTries();
 
-	// Repeat the guess back to them
 	while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries){
-		FText Guess = GetValidGuess(); // TODO: Make a loop checking validy
+		FText Guess = GetValidGuess();
 
 		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 

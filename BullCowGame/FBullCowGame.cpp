@@ -1,10 +1,14 @@
+#pragma once
+
 #include "FBullCowGame.h"
 #include <map>
+
 #define TMap std::map
 
 void FBullCowGame::reset()
 {
 }
+
 
 int32 FBullCowGame::GetMaxTries() const
 {
@@ -18,20 +22,24 @@ int32 FBullCowGame::GetMaxTries() const
 	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
 
+
 int32 FBullCowGame::GetCurrentTry() const
 {
 	return MyCurrentTry;
 }
+
 
 int32 FBullCowGame::GetHiddenWordLength() const
 {
 	return MyHiddenWord.length();
 }
 
+
 bool FBullCowGame::IsGameWon() const
 {
 	return bGameIsWon;
 }
+
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
@@ -41,10 +49,12 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 	else return EGuessStatus::OK;
 }
 
+
 FString FBullCowGame::GenerateIsogram()
 {
 	return FString();
 }
+
 
 FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
@@ -82,6 +92,7 @@ FBullCowGame::~FBullCowGame()
 {
 }
 
+
 bool FBullCowGame::IsIsogram(FString Word) const
 {
 	if (Word.length() <= 1)	return true;
@@ -98,6 +109,7 @@ bool FBullCowGame::IsIsogram(FString Word) const
 
 	return true;
 }
+
 
 bool FBullCowGame::IsLowerCase(FString Word) const
 {

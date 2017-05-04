@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 using FString = std::string;
@@ -29,7 +30,7 @@ public:
 	bool IsGameWon() const;
 
 	void reset(); // TODO: Make a more rich return value.
-	EGuessStatus CheckGuessValidity(FString Guess) const; // TODO: Make a more rich return value.
+	EGuessStatus CheckGuessValidity(FString Guess) const;
 	FString GenerateIsogram();
 
 	FBullCowCount SubmitValidGuess(FString Guess);
